@@ -1,8 +1,10 @@
 ﻿using Assets.Scripts.Common;
 using Assets.SiliconSocial;
 using Memoria;
+using Memoria.Prime;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public class EMinigame
 {
@@ -205,16 +207,74 @@ public class EMinigame
             AchievementManager.ReportAchievement(AcheivementKey.TreasureHuntS, 1);
     }
 
+
+    public static void HighlightShuffleBrother(Obj s1, EBin eBin)
+    {
+        if (FF9StateSystem.Common.FF9.fldMapNo == 1858) { // Alexandria/Weapon Shop
+            //global::Debug.Log("s1 cid: " + s1.cid);
+            Log.Message("s1 cid: " + s1.cid);
+            //Debug.Log("s1 cid: " + s1.cid);
+            //Debug.WriteLine
+        }
+    }
+
+
     public static void ShuffleGameAchievement(String langSymbol, Int32 mesId)
     {
+        // Relevant Event Code Binaries?:
+
+        // Event Code Binary Stack Trace:
+        //      eventCodeBinary	FLDSND3	    EBin.event_code_binary
+        // 		eventCodeBinary	GILDELETE	EBin.event_code_binary
+        //		eventCodeBinary	CFLAG	EBin.event_code_binary
+        // CFLAG (value is 7) again
+        // CFLAG a third time
+        // CFLAG a fourth time
+        //		eventCodeBinary	MESVALUE	EBin.event_code_binary
+        //		eventCodeBinary	MESN	EBin.event_code_binary
+        //		eventCodeBinary	MSPEED	EBin.event_code_binary
+        //		eventCodeBinary	TURN	EBin.event_code_binary
+        //		eventCodeBinary	CLRDIST	EBin.event_code_binary
+        //		eventCodeBinary	MOVE	EBin.event_code_binary
+
+        Int32 varOperation = 0;
         Int32 fldMapNo = FF9StateSystem.Common.FF9.fldMapNo;
+        Int32 scenarioCounter = PersistenSingleton<EventEngine>.Instance.eBin.getVarManually(EBin.SC_COUNTER_SVR);
+
+        //if (fldMapNo == 103) // Early game
+        varOperation = EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 4);
+        //if (fldMapNo == 2456 && scenarioCounter >= 10300) // Late game
+            //varOperation = EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 59);
+        //if (varOperation == 0)
+            //return;
+
+        Int32 jumpCount = PersistenSingleton<EventEngine>.Instance.eBin.getVarManually(varOperation);
+
         if (fldMapNo == 1858) // Alexandria/Weapon Shop
         {
             Boolean isCongratulation;
+            Boolean isRight;
+            Boolean isWrong;
+
+            Log.Message("varOperation: " + varOperation);
+            Log.Message("scenarioCounter: " + scenarioCounter);
+            Log.Message("jumpCount: " + jumpCount);
+
+            // mesID 238 = "Hey, it's Zidane! Let's play out game!"
+            // 267 is the prompt to pay Gil to start.
+            // 246 = "Which one is ...?" before the shuffling starts.
+            // 249 is the same message but after the shuffling.
+            // 252 is the prompt to select a brother.
+            // 266 = "Come challenge us again!"
+
+            // Checking the eventIDToMESID Dict gives us an EventID of 4.
+
             switch (langSymbol)
             {
                 case "US":
                 case "UK":
+                    isWrong = mesId == 255; // "Wrong!"
+                    isRight = mesId == 260; // "Bingo!"
                     isCongratulation = mesId == 265; // Zenero "Ahh! You're too good!"
                     break;
                 default:

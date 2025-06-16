@@ -144,8 +144,8 @@ public static class ETb
             return;
         if ((flags & ETb.WindowNotFollowActor) > 0)
             dialog.FocusToActor = false;
-        if (ETb.isMessageDebug)
-            global::Debug.Log($"NewMesWin => sid:{instance.gCur.sid}, mes: {mes}, field id:{FF9TextTool.FieldZoneId}, winID: {winID}, flags: {flags}, text:{dialog.Phrase}");
+       
+        global::Debug.Log($"NewMesWin => sid:{instance.gCur.sid}, mes: {mes}, field id:{FF9TextTool.FieldZoneId}, winID: {winID}, flags: {flags}, text:{dialog.Phrase}");
 
         VoicePlayer.PlayFieldZoneDialogAudio(FF9TextTool.FieldZoneId, mes, dialog);
 
@@ -488,7 +488,7 @@ public static class ETb
     public const Int32 EnterTownMesId = 40;
     public const Int32 EnterDungeonMesId = 41;
 
-    private static readonly Boolean isMessageDebug;
+    private static readonly Boolean isMessageDebug = true;
 
     private static Boolean sInitMesInh;
 
