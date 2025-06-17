@@ -211,10 +211,9 @@ public class EMinigame
     public static void HighlightShuffleBrother(Obj s1, EBin eBin)
     {
         if (FF9StateSystem.Common.FF9.fldMapNo == 1858) { // Alexandria/Weapon Shop
-            //global::Debug.Log("s1 cid: " + s1.cid);
-            Log.Message("s1 cid: " + s1.cid);
-            //Debug.Log("s1 cid: " + s1.cid);
-            //Debug.WriteLine
+            Log.Message("s1 flags: " + s1.flags);
+
+            // According to the logs, the s1 cid will always be either 4 or 2 during the minigame.
         }
     }
 
@@ -237,12 +236,11 @@ public class EMinigame
         //		eventCodeBinary	CLRDIST	EBin.event_code_binary
         //		eventCodeBinary	MOVE	EBin.event_code_binary
 
-        Int32 varOperation = 0;
+        Int32 varOperation = EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 2);
         Int32 fldMapNo = FF9StateSystem.Common.FF9.fldMapNo;
         Int32 scenarioCounter = PersistenSingleton<EventEngine>.Instance.eBin.getVarManually(EBin.SC_COUNTER_SVR);
 
         //if (fldMapNo == 103) // Early game
-        varOperation = EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 4);
         //if (fldMapNo == 2456 && scenarioCounter >= 10300) // Late game
             //varOperation = EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 59);
         //if (varOperation == 0)
@@ -252,6 +250,8 @@ public class EMinigame
 
         if (fldMapNo == 1858) // Alexandria/Weapon Shop
         {
+            EBin eBin = PersistenSingleton<EventEngine>.Instance.eBin;
+
             Boolean isCongratulation;
             Boolean isRight;
             Boolean isWrong;
