@@ -1,0 +1,488 @@
+Function Nero_Loop
+    switch 22 ( VAR_GlobUInt8_24 ) from 1 {
+    case +0:
+        set VAR_GlobUInt8_26 = 2
+        Wait( 1 )
+        SetDialogProgression( 0 )
+        Wait( 30 )
+        RunAnimation( 8054 )
+        WindowAsync( 4, 128, 513 )
+        set VAR_GlobUInt8_29 = 250
+        while ( ( GetDialogProgression < 2 ) && ( VAR_GlobUInt8_29 > 0 ) ) {
+            Wait( 1 )
+            set VAR_GlobUInt8_29--
+        }
+        while ( ( !IsButton(131072L) ) && ( !IsButton(524288L) ) ) {
+            Wait( 1 )
+        }
+        CloseWindow( 4 )
+        CloseWindow( 5 )
+        SetDialogProgression( 0 )
+        set VAR_GlobUInt8_26--
+        while ( VAR_GlobUInt8_26 > 0 ) {
+            set VAR_GlobBool_230 = 1
+            Wait( 1 )
+        }
+        while ( VAR_GlobBool_230 == 1 ) {
+            Wait( 1 )
+        }
+        set VAR_GlobBool_231 = 1
+        break
+    case +2:
+        WaitAnimation(  )
+        RunAnimation( 8054 )
+        WindowSync( 4, 128, 516 )
+        SetDialogProgression( 0 )
+        set VAR_GlobBool_231 = 1
+        break
+    case +5:
+        set VAR_GlobUInt8_26 = 2
+        Wait( 1 )
+        WaitAnimation(  )
+        RunAnimation( 8054 )
+        WindowAsync( 4, 128, 519 )
+        set VAR_GlobUInt8_29 = 250
+        while ( ( GetDialogProgression < 2 ) && ( VAR_GlobUInt8_29 > 0 ) ) {
+            Wait( 1 )
+            set VAR_GlobUInt8_29--
+        }
+        while ( ( !IsButton(131072L) ) && ( !IsButton(524288L) ) ) {
+            Wait( 1 )
+        }
+        CloseWindow( 4 )
+        CloseWindow( 5 )
+        SetDialogProgression( 0 )
+        set VAR_GlobUInt8_26--
+        while ( VAR_GlobUInt8_26 > 0 ) {
+            set VAR_GlobBool_230 = 1
+            Wait( 1 )
+        }
+        while ( VAR_GlobBool_230 == 1 ) {
+            Wait( 1 )
+        }
+        set VAR_GlobBool_231 = 1
+        break
+    case +7:
+        WaitAnimation(  )
+        RunAnimation( 8054 )
+        WindowSync( 4, 128, 522 )
+        set VAR_GlobBool_231 = 1
+        break
+    case +10:
+        SetObjectFlags( 7 )
+        WaitAnimation(  )
+        if ( VAR_GlobInt24_41 == 50 ) {
+            Wait( 30 )
+        }
+        SetWalkSpeed( 15 )
+        TimedTurn( Angle(550, 65203), 32 )
+        WaitTurn(  )
+        InitWalk(  )
+        Walk( 550, -333 )
+        CreateObject( 550, -333 )
+        TurnTowardObject( 250, 32 )
+        WaitTurn(  )
+        set VAR_GlobUInt8_26--
+        while ( VAR_GlobUInt8_26 > 0 ) {
+            set VAR_GlobBool_230 = 1
+            Wait( 1 )
+        }
+        while ( VAR_GlobBool_230 == 1 ) {
+            Wait( 1 )
+        }
+        set VAR_GlobBool_231 = 1
+        break
+    case +11:
+        CloseWindow( 7 )
+        if ( VAR_GlobUInt8_38 == 0 ) {
+            RunAnimation( 8054 )
+            WindowSync( 4, 128, 246 )
+        } else {
+            Wait( 3 )
+        }
+        set VAR_GlobBool_231 = 1
+        break
+    case +14:
+        Wait( 3 )
+        WaitAnimation(  )
+        set VAR_GlobUInt8_26--
+        while ( VAR_GlobUInt8_26 > 0 ) {
+            set VAR_GlobBool_230 = 1
+            Wait( 1 )
+        }
+        while ( VAR_GlobBool_230 == 1 ) {
+            Wait( 1 )
+        }
+        set VAR_GlobBool_231 = 1
+        break
+    case +15:
+        set VAR_LocInt8_8 = 3
+        RunSharedScript( 5 )
+        while ( VAR_GlobUInt8_33 < 99 ) {
+            SetAnimationSpeed( 16 + VAR_GlobUInt8_36 )
+            RunAnimation( 50 )
+            if ( ( VAR_GlobUInt8_33 == 1 ) && ( VAR_LocInt8_8 == 3 ) ) {
+                set VAR_LocInt8_8 = 2
+                set VAR_LocInt16_0 = GetEntryPosX(255)
+                set VAR_LocInt16_2 = GetEntryPosZ(255)
+                set VAR_LocInt16_4 = GetEntryPosY(255)
+                set VAR_LocInt16_6 = 0
+                while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                    MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 375 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 65248 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                    Wait( 1 )
+                    set VAR_LocInt16_6++
+                }
+                set VAR_LocInt16_0 = GetEntryPosX(255)
+                set VAR_LocInt16_2 = GetEntryPosZ(255)
+                set VAR_LocInt16_4 = GetEntryPosY(255)
+                set VAR_LocInt16_6 = 0
+                while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                    MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 200 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 65092 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                    Wait( 1 )
+                    set VAR_LocInt16_6++
+                }
+            } else {
+                if ( ( VAR_GlobUInt8_33 == 1 ) && ( VAR_LocInt8_8 == 2 ) ) {
+                    set VAR_LocInt8_8 = 3
+                    set VAR_LocInt16_0 = GetEntryPosX(255)
+                    set VAR_LocInt16_2 = GetEntryPosZ(255)
+                    set VAR_LocInt16_4 = GetEntryPosY(255)
+                    set VAR_LocInt16_6 = 0
+                    while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                        MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 375 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 65048 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                        Wait( 1 )
+                        set VAR_LocInt16_6++
+                    }
+                    set VAR_LocInt16_0 = GetEntryPosX(255)
+                    set VAR_LocInt16_2 = GetEntryPosZ(255)
+                    set VAR_LocInt16_4 = GetEntryPosY(255)
+                    set VAR_LocInt16_6 = 0
+                    while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                        MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 550 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 65203 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                        Wait( 1 )
+                        set VAR_LocInt16_6++
+                    }
+                } else {
+                    if ( ( VAR_GlobUInt8_33 == 2 ) && ( VAR_LocInt8_8 == 1 ) ) {
+                        set VAR_LocInt8_8 = 2
+                        set VAR_LocInt16_0 = GetEntryPosX(255)
+                        set VAR_LocInt16_2 = GetEntryPosZ(255)
+                        set VAR_LocInt16_4 = GetEntryPosY(255)
+                        set VAR_LocInt16_6 = 0
+                        while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                            MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 25 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 65137 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                            Wait( 1 )
+                            set VAR_LocInt16_6++
+                        }
+                        set VAR_LocInt16_0 = GetEntryPosX(255)
+                        set VAR_LocInt16_2 = GetEntryPosZ(255)
+                        set VAR_LocInt16_4 = GetEntryPosY(255)
+                        set VAR_LocInt16_6 = 0
+                        while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                            MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 200 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 65092 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                            Wait( 1 )
+                            set VAR_LocInt16_6++
+                        }
+                    } else {
+                        if ( ( VAR_GlobUInt8_33 == 2 ) && ( VAR_LocInt8_8 == 2 ) ) {
+                            set VAR_LocInt8_8 = 1
+                            set VAR_LocInt16_0 = GetEntryPosX(255)
+                            set VAR_LocInt16_2 = GetEntryPosZ(255)
+                            set VAR_LocInt16_4 = GetEntryPosY(255)
+                            set VAR_LocInt16_6 = 0
+                            while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                                MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 25 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 64937 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                                Wait( 1 )
+                                set VAR_LocInt16_6++
+                            }
+                            set VAR_LocInt16_0 = GetEntryPosX(255)
+                            set VAR_LocInt16_2 = GetEntryPosZ(255)
+                            set VAR_LocInt16_4 = GetEntryPosY(255)
+                            set VAR_LocInt16_6 = 0
+                            while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                                MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 65386 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 64981 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                                Wait( 1 )
+                                set VAR_LocInt16_6++
+                            }
+                        } else {
+                            if ( ( VAR_GlobUInt8_33 == 3 ) && ( VAR_LocInt8_8 == 1 ) ) {
+                                set VAR_LocInt8_8 = 3
+                                set VAR_LocInt16_0 = GetEntryPosX(255)
+                                set VAR_LocInt16_2 = GetEntryPosZ(255)
+                                set VAR_LocInt16_4 = GetEntryPosY(255)
+                                set VAR_LocInt16_6 = 0
+                                while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                                    MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 200 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 64892 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                                    Wait( 1 )
+                                    set VAR_LocInt16_6++
+                                }
+                                set VAR_LocInt16_0 = GetEntryPosX(255)
+                                set VAR_LocInt16_2 = GetEntryPosZ(255)
+                                set VAR_LocInt16_4 = GetEntryPosY(255)
+                                set VAR_LocInt16_6 = 0
+                                while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                                    MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 550 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 65203 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                                    Wait( 1 )
+                                    set VAR_LocInt16_6++
+                                }
+                            } else {
+                                if ( ( VAR_GlobUInt8_33 == 3 ) && ( VAR_LocInt8_8 == 2 ) ) {
+                                    set VAR_LocInt8_8 = 1
+                                    set VAR_LocInt16_0 = GetEntryPosX(255)
+                                    set VAR_LocInt16_2 = GetEntryPosZ(255)
+                                    set VAR_LocInt16_4 = GetEntryPosY(255)
+                                    set VAR_LocInt16_6 = 0
+                                    while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                                        MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 25 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 65047 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                                        Wait( 1 )
+                                        set VAR_LocInt16_6++
+                                    }
+                                    set VAR_LocInt16_0 = GetEntryPosX(255)
+                                    set VAR_LocInt16_2 = GetEntryPosZ(255)
+                                    set VAR_LocInt16_4 = GetEntryPosY(255)
+                                    set VAR_LocInt16_6 = 0
+                                    while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                                        MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 65386 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 64981 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                                        Wait( 1 )
+                                        set VAR_LocInt16_6++
+                                    }
+                                } else {
+                                    if ( ( VAR_GlobUInt8_33 == 3 ) && ( VAR_LocInt8_8 == 3 ) ) {
+                                        set VAR_LocInt8_8 = 2
+                                        set VAR_LocInt16_0 = GetEntryPosX(255)
+                                        set VAR_LocInt16_2 = GetEntryPosZ(255)
+                                        set VAR_LocInt16_4 = GetEntryPosY(255)
+                                        set VAR_LocInt16_6 = 0
+                                        while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                                            MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 375 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 65248 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                                            Wait( 1 )
+                                            set VAR_LocInt16_6++
+                                        }
+                                        set VAR_LocInt16_0 = GetEntryPosX(255)
+                                        set VAR_LocInt16_2 = GetEntryPosZ(255)
+                                        set VAR_LocInt16_4 = GetEntryPosY(255)
+                                        set VAR_LocInt16_6 = 0
+                                        while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                                            MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 200 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 65092 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                                            Wait( 1 )
+                                            set VAR_LocInt16_6++
+                                        }
+                                    } else {
+                                        if ( ( VAR_GlobUInt8_33 == 4 ) && ( VAR_LocInt8_8 == 3 ) ) {
+                                            set VAR_LocInt8_8 = 1
+                                            set VAR_LocInt16_0 = GetEntryPosX(255)
+                                            set VAR_LocInt16_2 = GetEntryPosZ(255)
+                                            set VAR_LocInt16_4 = GetEntryPosY(255)
+                                            set VAR_LocInt16_6 = 0
+                                            while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                                                MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 200 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 64892 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                                                Wait( 1 )
+                                                set VAR_LocInt16_6++
+                                            }
+                                            set VAR_LocInt16_0 = GetEntryPosX(255)
+                                            set VAR_LocInt16_2 = GetEntryPosZ(255)
+                                            set VAR_LocInt16_4 = GetEntryPosY(255)
+                                            set VAR_LocInt16_6 = 0
+                                            while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                                                MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 65386 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 64981 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                                                Wait( 1 )
+                                                set VAR_LocInt16_6++
+                                            }
+                                        } else {
+                                            if ( ( VAR_GlobUInt8_33 == 4 ) && ( VAR_LocInt8_8 == 2 ) ) {
+                                                set VAR_LocInt8_8 = 3
+                                                set VAR_LocInt16_0 = GetEntryPosX(255)
+                                                set VAR_LocInt16_2 = GetEntryPosZ(255)
+                                                set VAR_LocInt16_4 = GetEntryPosY(255)
+                                                set VAR_LocInt16_6 = 0
+                                                while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                                                    MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 375 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 65158 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                                                    Wait( 1 )
+                                                    set VAR_LocInt16_6++
+                                                }
+                                                set VAR_LocInt16_0 = GetEntryPosX(255)
+                                                set VAR_LocInt16_2 = GetEntryPosZ(255)
+                                                set VAR_LocInt16_4 = GetEntryPosY(255)
+                                                set VAR_LocInt16_6 = 0
+                                                while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                                                    MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 550 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 65203 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                                                    Wait( 1 )
+                                                    set VAR_LocInt16_6++
+                                                }
+                                            } else {
+                                                if ( ( VAR_GlobUInt8_33 == 4 ) && ( VAR_LocInt8_8 == 1 ) ) {
+                                                    set VAR_LocInt8_8 = 2
+                                                    set VAR_LocInt16_0 = GetEntryPosX(255)
+                                                    set VAR_LocInt16_2 = GetEntryPosZ(255)
+                                                    set VAR_LocInt16_4 = GetEntryPosY(255)
+                                                    set VAR_LocInt16_6 = 0
+                                                    while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                                                        MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 25 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 65137 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                                                        Wait( 1 )
+                                                        set VAR_LocInt16_6++
+                                                    }
+                                                    set VAR_LocInt16_0 = GetEntryPosX(255)
+                                                    set VAR_LocInt16_2 = GetEntryPosZ(255)
+                                                    set VAR_LocInt16_4 = GetEntryPosY(255)
+                                                    set VAR_LocInt16_6 = 0
+                                                    while ( VAR_LocInt16_6 <= VAR_GlobUInt8_37 ) {
+                                                        MoveInstantXZY( VAR_LocInt16_0 + ( ( VAR_LocInt16_6 * ( 200 - VAR_LocInt16_0 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_2 + ( ( VAR_LocInt16_6 * ( 65529 - VAR_LocInt16_2 ) ) / VAR_GlobUInt8_37 ), VAR_LocInt16_4 + ( ( VAR_LocInt16_6 * ( 65092 - VAR_LocInt16_4 ) ) / VAR_GlobUInt8_37 ) )
+                                                        Wait( 1 )
+                                                        set VAR_LocInt16_6++
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            WaitAnimation(  )
+            set VAR_GlobUInt8_34++
+            while ( VAR_GlobUInt8_34 > 0 ) {
+                Wait( 1 )
+            }
+            SetPathing( 1 )
+            SetAnimationSpeed( 16 )
+        }
+        set VAR_GlobUInt8_26--
+        while ( VAR_GlobUInt8_26 > 0 ) {
+            set VAR_GlobBool_230 = 1
+            Wait( 1 )
+        }
+        while ( VAR_GlobBool_230 == 1 ) {
+            Wait( 1 )
+        }
+        set VAR_GlobBool_231 = 1
+        break
+    case +16:
+        if ( VAR_LocInt8_8 == 2 ) {
+            RunAnimation( 8054 )
+            switch 3 ( VAR_GlobUInt8_38 ) from 0 {
+            case +0:
+                WindowSync( 4, 128, 249 )
+                break
+            case +1:
+                WindowSync( 5, 128, 250 )
+                break
+            case +2:
+                WindowSync( 6, 128, 251 )
+                break
+            }
+        }
+        Wait( 3 )
+        set VAR_GlobUInt8_26--
+        while ( VAR_GlobUInt8_26 > 0 ) {
+            set VAR_GlobBool_230 = 1
+            Wait( 1 )
+        }
+        while ( VAR_GlobBool_230 == 1 ) {
+            Wait( 1 )
+        }
+        set VAR_GlobBool_231 = 1
+        break
+    case +18:
+        WaitAnimation(  )
+        if ( VAR_GlobUInt8_38 == 0 ) {
+            RunAnimation( 8054 )
+            if ( VAR_GlobUInt8_39 == VAR_LocInt8_8 ) {
+                WindowSync( 4, 128, 258 )
+                set VAR_GlobUInt8_40 = 1
+            } else {
+                WindowSync( 4, 128, 255 )
+            }
+            WaitAnimation(  )
+        }
+        Wait( 3 )
+        set VAR_GlobUInt8_26--
+        while ( VAR_GlobUInt8_26 > 0 ) {
+            set VAR_GlobBool_230 = 1
+            Wait( 1 )
+        }
+        while ( VAR_GlobBool_230 == 1 ) {
+            Wait( 1 )
+        }
+        set VAR_GlobBool_231 = 1
+        break
+    case +19:
+        set VAR_GlobUInt8_27 = 0
+        RunSharedScript( 6 )
+        Wait( 10 )
+        set VAR_GlobInt24_41 *= 2
+        if ( VAR_GlobInt16_47 < 200 ) {
+            set VAR_GlobInt16_47++
+        }
+        if ( VAR_GlobUInt8_40 == 1 ) {
+            RunSoundCode3( 53248, 108, 0, -128, 125 )
+            AddGil( VAR_GlobInt24_41 )
+            set VAR_GlobInt24_44 = ( VAR_GlobInt24_41 + ( VAR_GlobInt24_41 / 2 ) )
+            SetTextVariable( 0, VAR_GlobInt24_41 )
+            SetTextVariable( 7, GetGil )
+            WindowAsync( 7, 0, 267 )
+            WindowSync( 2, 0, 263 )
+            WaitSharedScript(  )
+            RunAnimation( 8054 )
+            SetTextVariable( 1, VAR_GlobInt24_44 )
+            if ( VAR_GlobInt24_41 < 25600 ) {
+                WindowSync( 4, 128, 261 )
+                CloseWindow( 7 )
+                WaitAnimation(  )
+                if ( GetDialogChoice == 0 ) {
+                    if ( GetGil < VAR_GlobInt24_44 ) {
+                        RunAnimation( 8054 )
+                        WindowSync( 4, 128, 245 )
+                        WaitAnimation(  )
+                    } else {
+                        set VAR_GlobUInt8_27 = 1
+                        RemoveGil( VAR_GlobInt24_44 )
+                        RunSoundCode3( 53248, 1045, 0, -128, 125 )
+                    }
+                }
+            } else {
+                WindowSync( 4, 128, 265 )
+                CloseWindow( 7 )
+                WaitAnimation(  )
+                set VAR_GlobUInt8_49 = 1
+            }
+        }
+        WaitSharedScript(  )
+        set VAR_GlobUInt8_26--
+        while ( VAR_GlobUInt8_26 > 0 ) {
+            set VAR_GlobBool_230 = 1
+            Wait( 1 )
+        }
+        while ( VAR_GlobBool_230 == 1 ) {
+            Wait( 1 )
+        }
+        set VAR_GlobBool_231 = 1
+        break
+    case +20:
+        if ( VAR_GlobUInt8_49 == 0 ) {
+            WaitAnimation(  )
+            RunAnimation( 8054 )
+            WindowSync( 4, 128, 266 )
+            CloseWindow( 7 )
+        }
+        Wait( 3 )
+        WaitAnimation(  )
+        set VAR_GlobBool_231 = 1
+        break
+    case +21:
+        SetObjectFlags( 5 )
+        Wait( 3 )
+        set VAR_GlobUInt8_26--
+        while ( VAR_GlobUInt8_26 > 0 ) {
+            set VAR_GlobBool_230 = 1
+            Wait( 1 )
+        }
+        while ( VAR_GlobBool_230 == 1 ) {
+            Wait( 1 )
+        }
+        set VAR_GlobBool_231 = 1
+        break
+    }
+    Wait( 1 )
+    loop

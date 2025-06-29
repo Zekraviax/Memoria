@@ -213,8 +213,6 @@ public class EMinigame
         // Function needs to be passed the ObjList, not just the first Obj.
 
         if (FF9StateSystem.Common.FF9.fldMapNo == 1858) { // Alexandria/Weapon Shop
-            //Log.Message("s1 flags: " + s1.flags);
-
             // According to the logs, the s1 cid will always be either 4 or 2 during the minigame.
         }
     }
@@ -222,6 +220,8 @@ public class EMinigame
 
     public static void ShuffleGameAchievement(String langSymbol, Int32 mesId)
     {
+        //Int32 fldMapNo = FF9StateSystem.Common.FF9.fldMapNo;
+
         // Relevant Event Code Binaries?:
 
         // Event Code Binary Stack Trace:
@@ -243,33 +243,65 @@ public class EMinigame
         //varOperation = EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 59);
         //if (varOperation == 0)
         //return;
-        
-        //Int32 fldMapNo = FF9StateSystem.Common.FF9.fldMapNo;
 
-        Int32 varOperation = EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 2);
+        // Checking the eventIDToMESID Dict gives us an EventID of 4.
+
+        EBin eBin = PersistenSingleton<EventEngine>.Instance.eBin;
         Int32 scenarioCounter = PersistenSingleton<EventEngine>.Instance.eBin.getVarManually(EBin.SC_COUNTER_SVR);
-        Int32 jumpCount = PersistenSingleton<EventEngine>.Instance.eBin.getVarManually(varOperation);
 
-        if (FF9StateSystem.Common.FF9.fldMapNo == 1858) // Alexandria/Weapon Shop
-        {
-            EBin eBin = PersistenSingleton<EventEngine>.Instance.eBin;
+        // Function 'Nero_Loop' uses a "VAR_GlobUInt8_24" in a switch statement to control the nero brothers.
+        Int32 varOperation = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Global, EBin.VariableType.Int24, 24));
+        Int32 victory = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Global, EBin.VariableType.Int24, 41));
+        Int32 streakCount = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Global, EBin.VariableType.Int16, 47));
+        Int32 lastRememberedBrother = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Global, EBin.VariableType.Byte, 38));
+        Int32 globalBrother = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Global, EBin.VariableType.Byte, 39));
+        Int32 localBrother = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 8));
 
+
+        if (FF9StateSystem.Common.FF9.fldMapNo == 1858) { // Alexandria/Weapon Shop
             Boolean isCongratulation;
             Boolean isRight;
             Boolean isWrong;
 
+            //Log.Message("scenarioCounter: " + scenarioCounter);
             Log.Message("varOperation: " + varOperation);
-            Log.Message("scenarioCounter: " + scenarioCounter);
-            Log.Message("jumpCount: " + jumpCount);
+            Log.Message("victory: " + victory);
+            Log.Message("streakCount: " + streakCount);
+            Log.Message("lastRememberedBrother: " + lastRememberedBrother);
+            Log.Message("globalBrother: " + globalBrother);
+            Log.Message("localBrother: " + localBrother);
+
+
+            // Nero_Loop Script 1: While VAR_GlobUInt8_24 is equal to 11+:
+            // if ( VAR_GlobUInt8_38 == 0 ) {
+            // One of the brothers ask "Which one is Zenero?"
+
+            // Nero_Loop Script 2: While VAR_GlobUInt8_24 is equal to 12+:
+            // if ( VAR_GlobUInt8_38 == 1 )
+            // One of the brothers ask "Which one is Benero?"
+
+            // Nero_Loop Script 3: While VAR_GlobUInt8_24 is equal to 12+:
+            // if ( VAR_GlobUInt8_38 == 2 )
+            // One of the brothers ask "Which one is Genero?"
+            // All three set VAR_GlobBool_231 to 1, but that happens all over the nero_loop, and is only set to zero in other scripts (Code2_Loop).
+
+
+            // VAR_GlobUInt8_38 is used for playing the shuffle animations and choosing a brother to ask which one is which??
+            // VAR_GlobUInt8_39 and VAR_LocInt8_8 are used to compare which brother is correct, verses the players' choice.
+
+
+            // When VAR_GlobInt16_47 is incremented by 1, the player gains gil shortly afterwards.
+            // VAR_GlobUInt8_49 is set to 1 whenever a brother says "You're too good."
+
 
             // mesID 238 = "Hey, it's Zidane! Let's play out game!"
             // 267 is the prompt to either exit, or pay Gil to start the minigame.
             // 246 = "Which one is ...?" before the shuffling starts.
             // 249 = "Which one is ...?" after the shuffling ends.
             // 252 is the prompt to select a brother.
+            // 265 is the final victory message, but it's only said by Zenero.
             // 266 = "Come challenge us again!"
 
-            // Checking the eventIDToMESID Dict gives us an EventID of 4.
 
             switch (langSymbol)
             {
