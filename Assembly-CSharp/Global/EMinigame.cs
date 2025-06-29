@@ -210,8 +210,10 @@ public class EMinigame
 
     public static void HighlightShuffleBrother(Obj s1, EBin eBin)
     {
+        // Function needs to be passed the ObjList, not just the first Obj.
+
         if (FF9StateSystem.Common.FF9.fldMapNo == 1858) { // Alexandria/Weapon Shop
-            Log.Message("s1 flags: " + s1.flags);
+            //Log.Message("s1 flags: " + s1.flags);
 
             // According to the logs, the s1 cid will always be either 4 or 2 during the minigame.
         }
@@ -236,19 +238,19 @@ public class EMinigame
         //		eventCodeBinary	CLRDIST	EBin.event_code_binary
         //		eventCodeBinary	MOVE	EBin.event_code_binary
 
-        Int32 varOperation = EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 2);
-        Int32 fldMapNo = FF9StateSystem.Common.FF9.fldMapNo;
-        Int32 scenarioCounter = PersistenSingleton<EventEngine>.Instance.eBin.getVarManually(EBin.SC_COUNTER_SVR);
-
         //if (fldMapNo == 103) // Early game
         //if (fldMapNo == 2456 && scenarioCounter >= 10300) // Late game
-            //varOperation = EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 59);
+        //varOperation = EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 59);
         //if (varOperation == 0)
-            //return;
+        //return;
+        
+        //Int32 fldMapNo = FF9StateSystem.Common.FF9.fldMapNo;
 
+        Int32 varOperation = EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 2);
+        Int32 scenarioCounter = PersistenSingleton<EventEngine>.Instance.eBin.getVarManually(EBin.SC_COUNTER_SVR);
         Int32 jumpCount = PersistenSingleton<EventEngine>.Instance.eBin.getVarManually(varOperation);
 
-        if (fldMapNo == 1858) // Alexandria/Weapon Shop
+        if (FF9StateSystem.Common.FF9.fldMapNo == 1858) // Alexandria/Weapon Shop
         {
             EBin eBin = PersistenSingleton<EventEngine>.Instance.eBin;
 
@@ -261,9 +263,9 @@ public class EMinigame
             Log.Message("jumpCount: " + jumpCount);
 
             // mesID 238 = "Hey, it's Zidane! Let's play out game!"
-            // 267 is the prompt to pay Gil to start.
+            // 267 is the prompt to either exit, or pay Gil to start the minigame.
             // 246 = "Which one is ...?" before the shuffling starts.
-            // 249 is the same message but after the shuffling.
+            // 249 = "Which one is ...?" after the shuffling ends.
             // 252 is the prompt to select a brother.
             // 266 = "Come challenge us again!"
 
@@ -275,7 +277,7 @@ public class EMinigame
                 case "UK":
                     isWrong = mesId == 255; // "Wrong!"
                     isRight = mesId == 260; // "Bingo!"
-                    isCongratulation = mesId == 265; // Zenero "Ahh! You're too good!"
+                    isCongratulation = mesId == 265; // "Ahh! You're too good!"
                     break;
                 default:
                     isCongratulation = mesId == 264;
