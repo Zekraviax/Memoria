@@ -246,16 +246,22 @@ public class EMinigame
 
         // Checking the eventIDToMESID Dict gives us an EventID of 4.
 
+
+        // example variables
+        // Hades Workshop: 0x3409 = VAR_GlobUInt8_52
+        // Memoria: eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 52)
+
         EBin eBin = PersistenSingleton<EventEngine>.Instance.eBin;
         Int32 scenarioCounter = PersistenSingleton<EventEngine>.Instance.eBin.getVarManually(EBin.SC_COUNTER_SVR);
 
         // Function 'Nero_Loop' uses a "VAR_GlobUInt8_24" in a switch statement to control the nero brothers.
-        Int32 varOperation = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Global, EBin.VariableType.Int24, 24));
-        Int32 victory = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Global, EBin.VariableType.Int24, 41));
-        Int32 streakCount = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Global, EBin.VariableType.Int16, 47));
-        Int32 lastRememberedBrother = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Global, EBin.VariableType.Byte, 38));
-        Int32 globalBrother = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Global, EBin.VariableType.Byte, 39));
-        Int32 localBrother = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 8));
+        // Looks like these *do* work but only if the unity debugger is attached.
+        Int32 varOperation = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 24));
+        Int32 goldToEarn = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 41));
+        Int32 streakCount = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int16, 47));
+        Int32 lastRememberedBrother = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 38));
+        Int32 globalBrother = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 39));
+        //Int32 localBrother = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 8));
 
 
         if (FF9StateSystem.Common.FF9.fldMapNo == 1858) { // Alexandria/Weapon Shop
@@ -264,13 +270,62 @@ public class EMinigame
             Boolean isWrong;
 
             //Log.Message("scenarioCounter: " + scenarioCounter);
+            switch (mesId) {
+                case 236:
+                case 237:
+                case 238:
+                    Log.Message("Hey, it’s Zidane! Let's play our game!");
+                    break;
+                case 239:
+                case 240:
+                case 241:
+                    Log.Message("First, pay us X Gil.");
+                    break;
+                case 246:
+                case 247:
+                case 248:
+                case 249:
+                case 250:
+                case 251:
+                    Log.Message("Which one is ...?");
+                    break;
+                case 252:
+                case 253:
+                case 254:
+                    Log.Message("Dialog Chouse: (NeroBrother) is / on the left / in the middle / on the right");
+                    break;
+                case 255:
+                case 256:
+                case 257:
+                    Log.Message("Wrong!");
+                    break;
+                case 258:
+                case 259:
+                case 260:
+                    Log.Message("Bingo!");
+                    break;
+                case 266:
+                    Log.Message("Come challenge us again!");
+                    break;
+                default:
+                    break;
+            }
+
+
             Log.Message("varOperation: " + varOperation);
-            Log.Message("victory: " + victory);
+            Log.Message("goldToEarn: " + goldToEarn);
             Log.Message("streakCount: " + streakCount);
             Log.Message("lastRememberedBrother: " + lastRememberedBrother);
             Log.Message("globalBrother: " + globalBrother);
-            Log.Message("localBrother: " + localBrother);
+            //Log.Message("localBrother: " + localBrother);
 
+            //List<int> indices = new List<int>() { 24, 39, 41 };
+            //List<bool> varsAreBooleans = new List<bool>() { false, false, false };
+            //List<int> intsInUse = FF9StateSystem.EventState.FindVariableInFieldScriptUsage(indices, varsAreBooleans);
+
+            //foreach (var value in intsInUse) {
+                //Console.Write($"{value}");
+            //}
 
             // Nero_Loop Script 1: While VAR_GlobUInt8_24 is equal to 11+:
             // if ( VAR_GlobUInt8_38 == 0 ) {
