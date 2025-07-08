@@ -5,6 +5,7 @@ using Memoria.Prime;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using UnityEngine;
 
 public class EMinigame
 {
@@ -208,60 +209,66 @@ public class EMinigame
     }
 
 
-    public static void HighlightShuffleBrother(Obj s1, EBin eBin)
+    public static void HighlightShuffleBrother(ObjList s0, EBin eBin)
     {
         // Function needs to be passed the ObjList, not just the first Obj.
+        Int32 switchVar = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 24));
+        bool doOnce = true;
 
-        if (FF9StateSystem.Common.FF9.fldMapNo == 1858) { // Alexandria/Weapon Shop
+        if (FF9StateSystem.Common.FF9.fldMapNo == 1858 && switchVar == 18 && doOnce)  {
+            // Alexandria/Weapon Shop
             // According to the logs, the s1 cid will always be either 4 or 2 during the minigame.
+
+            //Log.Message("test");
+
+            EventEngine instance = PersistenSingleton<EventEngine>.Instance;
+
+            //foreach (Obj object in s0.obj) { }
+
+            GameObject Brother1 = instance.FindObjByUID(4).go;
+            GameObject Brother2 = instance.FindObjByUID(4).go;
+            GameObject Brother3 = instance.FindObjByUID(4).go;
+
+            foreach (FF9Char character in FF9StateSystem.Common.FF9.charArray.Values) {
+                Log.Message("character: " + character.geo.gameObject.name);
+            }
+
+            doOnce = false;
+        } else  {
+            doOnce = true;
         }
     }
 
 
-    public static void ShuffleGameAchievement(String langSymbol, Int32 mesId)
+    public static void ShuffleGameAchievement(string langSymbol, int mesId, Dialog dialog)
     {
-        //Int32 fldMapNo = FF9StateSystem.Common.FF9.fldMapNo;
-
-        // Relevant Event Code Binaries?:
-
-        // Event Code Binary Stack Trace:
-        //      eventCodeBinary	FLDSND3	    EBin.event_code_binary
-        // 		eventCodeBinary	GILDELETE	EBin.event_code_binary
-        //		eventCodeBinary	CFLAG	EBin.event_code_binary
-        // CFLAG (value is 7) again
-        // CFLAG a third time
-        // CFLAG a fourth time
-        //		eventCodeBinary	MESVALUE	EBin.event_code_binary
-        //		eventCodeBinary	MESN	EBin.event_code_binary
-        //		eventCodeBinary	MSPEED	EBin.event_code_binary
-        //		eventCodeBinary	TURN	EBin.event_code_binary
-        //		eventCodeBinary	CLRDIST	EBin.event_code_binary
-        //		eventCodeBinary	MOVE	EBin.event_code_binary
-
-        //if (fldMapNo == 103) // Early game
-        //if (fldMapNo == 2456 && scenarioCounter >= 10300) // Late game
-        //varOperation = EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 59);
-        //if (varOperation == 0)
-        //return;
-
-        // Checking the eventIDToMESID Dict gives us an EventID of 4.
-
-
         // example variables
         // Hades Workshop: 0x3409 = VAR_GlobUInt8_52
         // Memoria: eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 52)
 
         EBin eBin = PersistenSingleton<EventEngine>.Instance.eBin;
-        Int32 scenarioCounter = PersistenSingleton<EventEngine>.Instance.eBin.getVarManually(EBin.SC_COUNTER_SVR);
+        //Int32 scenarioCounter = PersistenSingleton<EventEngine>.Instance.eBin.getVarManually(EBin.SC_COUNTER_SVR);
 
-        // Function 'Nero_Loop' uses a "VAR_GlobUInt8_24" in a switch statement to control the nero brothers.
+        // The 3 'Nero_Loop' functions use a "VAR_GlobUInt8_24" in a switch statement to control the nero brothers.
         // Looks like these *do* work but only if the unity debugger is attached.
-        Int32 varOperation = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 24));
-        Int32 goldToEarn = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 41));
+        // 15 == Play animations to shuffle the brothers around.
+        // 7 == The player is prompted to guess a brother.
+        // 18 == Player just guessed which nero brother is the right one.
+        Int32 switchVar = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 24));
+        
+        // VAR_GlobInt24_41
+        Int32 gilToEarn = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 41));
+        
         Int32 streakCount = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int16, 47));
-        Int32 lastRememberedBrother = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 38));
-        Int32 globalBrother = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 39));
-        //Int32 localBrother = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 8));
+        
+        // If it's 0, then the correct brother is 'on the right'?
+        // 2 = 'in the middle'?
+        Int32 globalCorrectBrother = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 39));
+        
+        // How many times has the player played the shuffle minigame.
+        Int32 attemptCount = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 39));
+        
+        Int32 instanceIndex8 = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Instance, EBin.VariableType.Byte, 8));
 
 
         if (FF9StateSystem.Common.FF9.fldMapNo == 1858) { // Alexandria/Weapon Shop
@@ -270,29 +277,33 @@ public class EMinigame
             Boolean isWrong;
 
             //Log.Message("scenarioCounter: " + scenarioCounter);
-            switch (mesId) {
+            /*switch (mesId) {
                 case 236:
                 case 237:
                 case 238:
                     Log.Message("Hey, it’s Zidane! Let's play our game!");
                     break;
-                case 239:
+                /*case 239:
                 case 240:
                 case 241:
                     Log.Message("First, pay us X Gil.");
                     break;
-                case 246:
                 case 247:
-                case 248:
+                    Log.Message("Which one is Benero?");
+                    break;
                 case 249:
+                    Log.Message("Which one is Zenero?");
+                    break;
                 case 250:
+                    Log.Message("Which one is Benero?");
+                    break;
                 case 251:
-                    Log.Message("Which one is ...?");
+                    Log.Message("Which one is Genero?");
                     break;
                 case 252:
                 case 253:
                 case 254:
-                    Log.Message("Dialog Chouse: (NeroBrother) is / on the left / in the middle / on the right");
+                    Log.Message("Dialog Choice: (NeroBrother) is / on the left / in the middle / on the right");
                     break;
                 case 255:
                 case 256:
@@ -304,20 +315,24 @@ public class EMinigame
                 case 260:
                     Log.Message("Bingo!");
                     break;
+                case 261:
+                    Log.Message("Dialogue Choice: Pay us X Gil to continue playing. Pay / Don't pay");
+                    break;
                 case 266:
                     Log.Message("Come challenge us again!");
                     break;
                 default:
                     break;
-            }
+            }*/
 
-
-            Log.Message("varOperation: " + varOperation);
-            Log.Message("goldToEarn: " + goldToEarn);
+            Log.Message("switchVar: " + switchVar);
+            Log.Message("globalCorrectBrother: " + globalCorrectBrother);
+            Log.Message("instance_index8: " + instanceIndex8);
+            Log.Message("gilToEarn: " + gilToEarn);
             Log.Message("streakCount: " + streakCount);
-            Log.Message("lastRememberedBrother: " + lastRememberedBrother);
-            Log.Message("globalBrother: " + globalBrother);
-            //Log.Message("localBrother: " + localBrother);
+            Log.Message("attemptCount: " + attemptCount);
+            
+            Log.Message(dialog.Phrase);
 
             //List<int> indices = new List<int>() { 24, 39, 41 };
             //List<bool> varsAreBooleans = new List<bool>() { false, false, false };

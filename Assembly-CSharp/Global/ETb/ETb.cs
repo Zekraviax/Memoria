@@ -157,7 +157,7 @@ public static class ETb
         EMinigame.ProvokeMogAchievement(lang, mes);
         EMinigame.JumpingRopeAchievement(lang, mes);
         EMinigame.GetRewardFromQueenStellaAchievement();
-        EMinigame.ShuffleGameAchievement(lang, mes);
+        EMinigame.ShuffleGameAchievement(lang, mes, dialog);
         EMinigame.ChocoboBeakLV99Achievement(lang, mes);
         EMinigame.AtleteQueenAchievement_ByMessage(lang, mes);
         EMinigame.TreasureHunterSAchievement(lang, mes);
