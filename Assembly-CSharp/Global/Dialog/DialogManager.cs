@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Assets.Sources.Scripts.UI.Common;
 using Memoria;
 using Memoria.Assets;
+using Memoria.Prime;
 using Memoria.Prime.Text;
 using UnityEngine;
 
@@ -123,7 +124,27 @@ public class DialogManager : Singleton<DialogManager>
             }
             else if (PersistenSingleton<UIManager>.Instance.UnityScene == UIManager.Scene.Field || PersistenSingleton<UIManager>.Instance.UnityScene == UIManager.Scene.World)
             {
+                //Int32 varManually = PersistenSingleton<EventEngine>.Instance.eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 31));
+                
+                Log.Message("phrase: " + dialogFromPool.Phrase);
+                if (dialogFromPool.Phrase.Contains("on the left") && dialogFromPool.Phrase.Contains("on the right")) {
+                    // To-Do:
+                    //dialogFromPool.Phrase.Substring("");
+                    
+                    //dialogFromPool.ApplyDialogTextPatch();
+                    //ParseSingleConstantTextReplaceTag
+
+                    string splitString = "[STRT=79,5][TAIL=UPRF][PCHC=3,2][WDTH=2,93,-1,3,87,-1][IMME][ZDNE]“Benero is";
+                    //int len = dialogFromPool.Phrase.Split(splitString).Length;
+                    dialogFromPool.Phrase.Insert(12, "[78C840][HSHD]");
+                }
+                
                 String phrase = TextPatcher.PatchDialogString(FF9TextTool.FieldText(textId), dialogFromPool);
+                
+                // To-Do:
+                // Insert a TextFlag that makes one of the options yellow here (before the if statement)
+                //if ()  { }
+                
                 if (Configuration.Lang.DualLanguageMode == 2 && po != null)
                 {
                     Localization.UseSecondaryLanguage = true;

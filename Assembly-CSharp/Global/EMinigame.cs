@@ -209,25 +209,32 @@ public class EMinigame
     }
 
 
-    public static void HighlightShuffleBrother(ObjList s0, EBin eBin)
+    public static void HighlightShuffleBrother(EBin eBin)
     {
-        // Function needs to be passed the ObjList, not just the first Obj.
         Int32 switchVar = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 24));
         bool doOnce = true;
+        Int32 storeVar = -1;
 
-        if (FF9StateSystem.Common.FF9.fldMapNo == 1858 && switchVar == 18 && doOnce)  {
+        //&& switchVar == 18 && doOnce
+        if (FF9StateSystem.Common.FF9.fldMapNo == 1858 && storeVar != switchVar)
+        {
+            //storeVar = switchVar;
+            
+            Int32 globalCorrectBrother = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 39));
+            Log.Message("globalCorrectBrother: " + globalCorrectBrother);
+            
             // Alexandria/Weapon Shop
             // According to the logs, the s1 cid will always be either 4 or 2 during the minigame.
 
             //Log.Message("test");
 
-            EventEngine instance = PersistenSingleton<EventEngine>.Instance;
+            /*EventEngine instance = PersistenSingleton<EventEngine>.Instance;
 
             //foreach (Obj object in s0.obj) { }
 
             GameObject Brother1 = instance.FindObjByUID(4).go;
-            GameObject Brother2 = instance.FindObjByUID(4).go;
-            GameObject Brother3 = instance.FindObjByUID(4).go;
+            GameObject Brother2 = instance.FindObjByUID(7).go;
+            GameObject Brother3 = instance.FindObjByUID(8).go;
 
             foreach (FF9Char character in FF9StateSystem.Common.FF9.charArray.Values) {
                 Log.Message("character: " + character.geo.gameObject.name);
@@ -236,6 +243,7 @@ public class EMinigame
             doOnce = false;
         } else  {
             doOnce = true;
+        }*/
         }
     }
 
@@ -261,13 +269,19 @@ public class EMinigame
         
         Int32 streakCount = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int16, 47));
         
+        // Stores which brother is the right one.
         // If it's 0, then the correct brother is 'on the right'?
-        // 2 = 'in the middle'?
+        // 1 == 'in the middle'
+        // 3 == 'on the left'?
+        // Why does the game add 1 to this var when you choose a brother?
         Int32 globalCorrectBrother = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 39));
         
-        // How many times has the player played the shuffle minigame.
+        // How many times has the player has played the shuffle minigame.
         Int32 attemptCount = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 39));
         
+        // Stores the players' choice: (on the left / in the middle / on the right)
+        // 2 == 'in the middle'?
+        // 3 == 'to the right'?
         Int32 instanceIndex8 = eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Instance, EBin.VariableType.Byte, 8));
 
 
@@ -275,6 +289,16 @@ public class EMinigame
             Boolean isCongratulation;
             Boolean isRight;
             Boolean isWrong;
+
+            switch (mesId) {
+                case 252:
+                case 253:
+                case 254:
+                    //Log.Message("Dialog Choice: (NeroBrother) is / on the left / in the middle / on the right");
+
+                    //foreach (GameObject choice in dialog.maskChoiceList)  { }
+                    break;
+            }
 
             //Log.Message("scenarioCounter: " + scenarioCounter);
             /*switch (mesId) {

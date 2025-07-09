@@ -325,9 +325,11 @@ public class EBin
                 s1.ip += 7;
                 return 0;
             }
+            
             EMinigame.ChanbaraBonusPoints(s1, this);
             EMinigame.SetViviSpeed(s1, this);
-            EMinigame.HighlightShuffleBrother(s0, this);
+            //EMinigame.HighlightShuffleBrother(this);
+            
             s1.ip++;
             if (varOperation >= 0x80)
             {

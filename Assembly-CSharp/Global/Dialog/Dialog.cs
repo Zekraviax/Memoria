@@ -1,6 +1,7 @@
 ﻿using Assets.Sources.Scripts.UI.Common;
 using Memoria;
 using Memoria.Assets;
+using Memoria.Prime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -155,6 +156,32 @@ public class Dialog : MonoBehaviour
             this.maskChoiceList.Add(choice);
             this.choiceList.Add(choice);
             lineControl++;
+            
+            // To-Do:
+            // highlight line of dialogue if it points to the shuffle brother
+            // FIgure out how to insert a texttag for the colour, and have it processed
+            // function: ApplyDialogTextPatch
+            if (FF9StateSystem.Common.FF9.fldMapNo == 1858 && PersistenSingleton<EventEngine>.Instance.eBin.getVarManually(
+                    EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Int24, 24)) == 18) {
+
+                Log.Message("Attempting to highlight correct dialogue choice for shuffle brother minigame.");
+
+                Int32 brotherAsInt = PersistenSingleton<EventEngine>.Instance.eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 39));
+                //eBin.getVarManually(EBin.getVarOperation(EBin.VariableSource.Map, EBin.VariableType.Byte, 39)
+                
+                Log.Message("line: " + line);
+                Log.Message("globalCorrectBrother: " + brotherAsInt);
+                
+                // Line == 2, 3, or 4
+                // globalCorrectBrother == 0, 1, 2, or 3?
+                if (line == brotherAsInt + 1) {
+                    //choiceWidget.color = new Color(0.784313738f, 0.6901961f, 0.2509804f);
+                } else {
+                    //String text = this.CurrentParser.ParsedText;
+                    //if (text.Length > 0 && this.CurrentParser.LineInfo.Count == 1 && text.Length < 6 && text.Contains("!"))
+                    //this.CurrentParser.InsertTag(new FFIXTextTag(FFIXTextTagCode.Yellow), 25);
+                }
+            }
         }
         NGUIExtension.SetKeyNevigation(this.maskChoiceList);
         ButtonGroupState.RemoveCursorMemorize(Dialog.DialogGroupButton);
